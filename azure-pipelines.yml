@@ -1,11 +1,12 @@
+
 # Starter pipeline
 # Start with a minimal pipeline that you can customize to build and deploy your code.
 # Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
-
+ 
 trigger:
 - main
-
+ 
 pool:
   vmImage: windows-latest
 
@@ -29,5 +30,6 @@ steps:
 #this code takes all the files in $(Build.ArtifactStagingDirectory) and uploads them as an artifact of your
 - task: PublishPipelineArtifact@1
   inputs:
-    targetPath: '$(Build.ArtfactStagingDirectory)'
+    targetPath: '$(Build.ArtifactStagingDirectory)'
     artifactName: 'azureCICDReleasePipeline'
+
