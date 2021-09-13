@@ -8,28 +8,28 @@ trigger:
 - main
  
 pool:
-vmImage: windows-latest
- 
+  vmImage: windows-latest
+
 variables:
-buildConfiguration: 'Release'
- 
+  buildConfiguration: 'release'
+
 steps:
 - task: DotNetCoreCLI@2
-displayName: Build
-inputs:
-command: build
-projects: '**/*.csproj'
-arguments: '--configuration $(buildConfiguration)'# Update this to match your need
- 
+  displayName: Build
+  inputs:
+    command: 'build'
+    projects: '**/*csproj'
+    arguments: '--configuration $(buildConfiguration)' 
 - task: DotNetCoreCLI@2
-inputs:
-command: publish
-publishWebProjects: True
-arguments: '--configuration $(BuildConfiguration) --output $(Build.ArtifactStagingDirectory)'
-zipAfterPublish: True
+  inputs:
+    command: 'publish'
+    publishWebProjects: True
+    arguments: '--configuration $(BuildConfiguration) --output $(Build.ArtifactStagingDirectory)'
+    zipAfterPublish: True
 
-# this code takes all the files in $(Build.ArtifactStagingDirectory) and uploads them as an artifact of your build.
+#this code takes all the files in $(Build.ArtifactStagingDirectory) and uploads them as an artifact of your
 - task: PublishPipelineArtifact@1
-inputs:
-targetPath: '$(Build.ArtifactStagingDirectory)'
-artifactName: 'azureCICDpipelinepublish'
+  inputs:
+    targetPath: '$(Build.ArtifactStagingDirectory)'
+    artifactName: 'azureCICDReleasePipeline'
+
